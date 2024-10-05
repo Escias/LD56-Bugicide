@@ -19,7 +19,7 @@ public class CameraControl : MonoBehaviour
 
     public Vector3 offset;
     public Vector3 targetOffset;
-    public float speed;
+    public float speed = 20;
 
     private float zoomSpeed = 20f;
     private float minFOV = 15f;
@@ -53,31 +53,17 @@ public class CameraControl : MonoBehaviour
             {
                 pointToLook = hit.point;
                 hitObject = hit.collider.gameObject;
+                Debug.Log(hit.collider.gameObject);
             }
             Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
         }
+        HandleZoom();
     }
 
     private void FixedUpdate()
     {
         Vector3 newPosition = transform.position + moveVelocity * Time.fixedDeltaTime;
         m_Camera.transform.position = newPosition;
-    }
-
-    public void CheckZoom()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            zoom = !zoom;
-            if (zoom)
-            {
-                Zoom();
-            }
-            else if (!zoom)
-            {
-                Unzoom();
-            }
-        }
     }
 
     public void Zoom()
