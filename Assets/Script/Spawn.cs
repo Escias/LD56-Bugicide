@@ -53,7 +53,7 @@ public class Spawn : MonoBehaviour
     {
         if (currentInsectNumber < maxInsectSpawn)
         {
-            var enemy = Instantiate(m_Insect, new Vector3(Random.Range(plane.position.x - x_dim, plane.position.x + x_dim), 0.2f, Random.Range(plane.position.z - z_dim, plane.position.z + z_dim)), Quaternion.identity);
+            var enemy = Instantiate(m_Insect, new Vector3(Random.Range(plane.position.x - x_dim, plane.position.x + x_dim), plane.position.y, Random.Range(plane.position.z - z_dim, plane.position.z + z_dim)), Quaternion.identity);
             enemy.transform.parent = gameObject.transform;
             currentInsectNumber++;
         }
