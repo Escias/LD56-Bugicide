@@ -25,6 +25,12 @@ public class CameraControl : MonoBehaviour
     private float minFOV = 15f;
     private float defaultFOV;
 
+    // Limites de mouvement de la caméra
+    public float minX = 65f;
+    public float maxX = 140f;
+    public float minZ = 15f;
+    public float maxZ = 140f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +69,11 @@ public class CameraControl : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 newPosition = transform.position + moveVelocity * Time.fixedDeltaTime;
+
+        // Limiter les mouvements de la caméra
+        newPosition.x = Mathf.Clamp(newPosition.x, minX, maxX);
+        newPosition.z = Mathf.Clamp(newPosition.z, minZ, maxZ);
+
         m_Camera.transform.position = newPosition;
     }
 
