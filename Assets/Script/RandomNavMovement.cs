@@ -23,7 +23,19 @@ public class RandomNavMovement : MonoBehaviour
         {
             // Choisit une nouvelle position aléatoire dans le rayon spécifié
             Vector3 newPosition = RandomNavSphere(transform.position, wanderRadius, -1);
-            agent.SetDestination(newPosition); // Définit la destination de l'agent
+
+            // Vérifie si la nouvelle position est valide et sur le NavMesh
+            if (NavMesh.SamplePosition(newPosition, out NavMeshHit navHit, wanderRadius, NavMesh.AllAreas))
+            {
+                agent.SetDestination(newPosition);
+            }
+            else
+            {
+                // Invert the position if it's not valid on the NavMesh
+                Vector3 invertedPosition = transform.position - (newPosition - transform.position);
+                agent.SetDestination(invertedPosition);
+            }
+
             timer = 0; // Réinitialise le timer
         }
     }
@@ -34,8 +46,8 @@ public class RandomNavMovement : MonoBehaviour
         Vector3 randDirection = Random.insideUnitSphere * distance;
         randDirection += origin;
 
-        NavMeshHit navHit;
-        NavMesh.SamplePosition(randDirection, out navHit, distance, layermask);
-        return navHit.position; // Retourne la position navigable
+        // Cette partie vérifie si la position est valide
+        NavMesh.SamplePosition(randDirection, out NavMeshHit navHit, distance, layermask);
+        return navHit.position; // Retourne la position navigable la plus proche
     }
 }
