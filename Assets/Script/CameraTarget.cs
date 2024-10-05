@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CameraTarget : MonoBehaviour
+{
+    [SerializeField]
+    private Camera m_Camera;
+    
+
+    public Vector3 pointToLook;
+    private GameObject hitObject;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Ray cameraRay = m_Camera.ScreenPointToRay(Input.mousePosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        float rayLength;
+
+        if (groundPlane.Raycast(cameraRay, out rayLength))
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(cameraRay, out hit, rayLength))
+            {
+                pointToLook = hit.point;
+                //hitObject = hit.collider.gameObject;
+            }
+            Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
+        }
+    }
+}
