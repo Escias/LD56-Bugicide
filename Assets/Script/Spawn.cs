@@ -11,6 +11,8 @@ public class Spawn : MonoBehaviour
     [SerializeField]
     public GameObject m_Insect;
 
+    public float timer = 0.5f;
+
     public int maxInsectSpawn;
     private int currentInsectNumber;
 
@@ -43,7 +45,7 @@ public class Spawn : MonoBehaviour
         while (currentInsectNumber < maxInsectSpawn)
         {
             SpawnInsect();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(timer);
         }
     }
 
