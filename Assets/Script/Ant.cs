@@ -22,7 +22,13 @@ public class Ant : MonoBehaviour
         {
             Spawn spawn = transform.parent.gameObject.GetComponent<Spawn>();
             spawn.DecreaseInsectNumber();
-            Destroy(transform.gameObject);
+            KillAnt();
         }
+    }
+
+    public void KillAnt()
+    {
+        FindObjectOfType<ScoreManager>().AddScore(1);
+        Destroy(transform.gameObject);
     }
 }

@@ -85,6 +85,9 @@ public class Skill : MonoBehaviour
         yield return new WaitForSeconds(5f);
         Destroy(dynamite);
         GameObject explosion = Instantiate(m_Explosion, dynamite.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+        yield return new WaitForSeconds(0.05f);
+        SphereCollider sphereCollider = explosion.GetComponent<SphereCollider>();
+        sphereCollider.enabled = false;
         yield return new WaitForSeconds(1.3f);
         Destroy(explosion);
         StopCoroutine(c_Dynamite);
@@ -98,7 +101,8 @@ public class Skill : MonoBehaviour
             {
                 spawn = pointObject.transform.parent.gameObject.GetComponent<Spawn>();
                 spawn.DecreaseInsectNumber();
-                Destroy(pointObject);
+                Ant ant = pointObject.GetComponent<Ant>();
+                ant.KillAnt();
             }
         }
         catch
