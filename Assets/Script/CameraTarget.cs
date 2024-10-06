@@ -8,7 +8,7 @@ public class CameraTarget : MonoBehaviour
     private Camera m_Camera;
     
 
-    public Vector3 pointToLook;
+    private Vector3 pointToLook;
     private GameObject hitObject;
     // Start is called before the first frame update
     void Start()
@@ -29,9 +29,19 @@ public class CameraTarget : MonoBehaviour
             if (Physics.Raycast(cameraRay, out hit, rayLength))
             {
                 pointToLook = hit.point;
-                //hitObject = hit.collider.gameObject;
+                hitObject = hit.collider.gameObject;
             }
             Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
         }
+    }
+
+    public Vector3 GetPointToLook()
+    {
+        return pointToLook;
+    }
+
+    public GameObject GetHitObject()
+    {
+        return hitObject;
     }
 }
