@@ -14,7 +14,7 @@ public class Spider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        health = 100;
+        health = 200;
     }
 
     // Update is called once per frame
@@ -84,7 +84,7 @@ public class Spider : MonoBehaviour
 
     public void KillSpider()
     {
-        FindObjectOfType<ScoreManager>().AddScore(1);
+        FindObjectOfType<ScoreManager>().AddScore(50);
         Destroy(transform.gameObject);
     }
 }
