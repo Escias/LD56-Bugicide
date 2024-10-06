@@ -691,6 +691,8 @@ MonoBehaviour:
   magnifyingGlassLight: {fileID: 2116822616}
   magnifyingGlass: {fileID: 1203394543}
   Smoke: {fileID: 206523144}
+  m_Dynamite: {fileID: 6166226633176445767, guid: 0d2d165aff44b5147ba385bb6996cfd1, type: 3}
+  m_Explosion: {fileID: 1414779434264708, guid: 20085c836a2461244a7ecfb6c0c1c1f4, type: 3}
   lineRenderer: {fileID: 992501102}
   target: {fileID: 139438208}
 --- !u!114 &139438208
