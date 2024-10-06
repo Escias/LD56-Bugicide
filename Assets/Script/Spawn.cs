@@ -13,6 +13,8 @@ public class Spawn : MonoBehaviour
     public GameObject m_Ant;
     [SerializeField]
     public GameObject m_Spider;
+    [SerializeField]
+    public GameObject m_Beetle;
 
     public float timer = 0.5f;
 
@@ -69,13 +71,17 @@ public class Spawn : MonoBehaviour
             NavMeshHit hit;
             if (NavMesh.SamplePosition(randomPosition, out hit, 1.0f, NavMesh.AllAreas))
             {
-                if (rate < 80) 
+                if (rate < 96) 
                 {
                     SpawnInsect(m_Ant, hit);
                 }
-                else if (rate > 98)
+                else if (rate >= 96 && rate < 99)
                 {
                     SpawnInsect(m_Spider, hit);
+                }
+                else if (rate >= 99)
+                {
+                    SpawnInsect(m_Beetle, hit);
                 }
             }
         }
