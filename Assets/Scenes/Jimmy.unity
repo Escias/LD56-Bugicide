@@ -2223,7 +2223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 268533396}
   - component: {fileID: 268533397}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MagnifyingGlassLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3660,9 +3660,10 @@ GameObject:
   - component: {fileID: 523121329}
   - component: {fileID: 523121331}
   - component: {fileID: 523121330}
-  m_Layer: 0
+  - component: {fileID: 523121332}
+  m_Layer: 2
   m_Name: Smoke
-  m_TagString: Untagged
+  m_TagString: MagnifyingGlass
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8479,6 +8480,29 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!136 &523121332
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523121328}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Height: 10
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &534203509
 GameObject:
   m_ObjectHideFlags: 0
@@ -27613,7 +27637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1796240417}
   - component: {fileID: 1796240416}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LightBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29241,7 +29265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2030284564}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: MagnifyingGlass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
