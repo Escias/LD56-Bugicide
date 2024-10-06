@@ -31,6 +31,7 @@ public class Skill : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             c_Light = StartCoroutine(SkillLight());
+            FindObjectOfType<ScoreManager>().AddScore(10); // TEST : ajouter 10 points
         }
         if (startLight)
         {
