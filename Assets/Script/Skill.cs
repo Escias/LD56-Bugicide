@@ -121,7 +121,7 @@ public class Skill : MonoBehaviour
         yield return new WaitForSeconds(5f);
         Destroy(dynamite);
         GameObject explosion = Instantiate(m_Explosion, dynamite.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.0000000000000001f);
         SphereCollider sphereCollider = explosion.GetComponent<SphereCollider>();
         sphereCollider.enabled = false;
         yield return new WaitForSeconds(1.3f);
