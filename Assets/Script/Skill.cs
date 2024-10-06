@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Android;
 
@@ -26,8 +27,10 @@ public class Skill : MonoBehaviour
     [SerializeField]
     public CameraTarget target;
     [SerializeField]
-    public GameManager gameManager;
+    public GameObject m_gameManager;
     Spawn spawn;
+    TimerUI timerUI;
+    GameManager gameManager;
     Vector3 pointToLook;
     GameObject pointObject;
 
@@ -46,33 +49,37 @@ public class Skill : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = m_gameManager.GetComponent<GameManager>();
+        timerUI = gameManager.GetComponent<TimerUI>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        pointToLook = target.GetPointToLook();
-        pointObject = target.GetHitObject();
-        if (Input.GetKeyDown(KeyCode.Alpha1) && !skillLightActive)
+        if (timerUI.IsTimerRunning())
         {
-            c_Light = StartCoroutine(SkillLightCoroutine());
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2) && !skillDynamiteActive)
-        {
-            c_Dynamite = StartCoroutine(SkillDynamiteCoroutine());
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3) && !skillWaterActive)
-        {
-            c_Water = StartCoroutine(SkillWaterCoroutine());
-        }
-        if (startLight)
-        {
-            SkillLight();
-        }
-        if (startWater)
-        {
-            SkillWater();
+            pointToLook = target.GetPointToLook();
+            pointObject = target.GetHitObject();
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !skillLightActive)
+            {
+                c_Light = StartCoroutine(SkillLightCoroutine());
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2) && !skillDynamiteActive)
+            {
+                c_Dynamite = StartCoroutine(SkillDynamiteCoroutine());
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3) && !skillWaterActive)
+            {
+                c_Water = StartCoroutine(SkillWaterCoroutine());
+            }
+            if (startLight)
+            {
+                SkillLight();
+            }
+            if (startWater)
+            {
+                SkillWater();
+            }
         }
     }
 

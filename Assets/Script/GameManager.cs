@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject magnifyingGlass;
     [SerializeField]
+    public GameObject endFrame;
+    [SerializeField]
     public GameObject m_Water;
     [SerializeField]
     public Image skill1;
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         magnifyingGlass.SetActive(false);
+        endFrame.SetActive(false);
         m_Water.SetActive(false);
         SetImageColor(skill1, 255, 255, 255, 255);
         SetImageColor(skill2, 255, 255, 255, 255);
