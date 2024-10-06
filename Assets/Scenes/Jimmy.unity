@@ -186,6 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SideMenu: {fileID: 1049618075}
+  m_GameManager: {fileID: 878555804}
 --- !u!114 &3871998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11232,6 +11233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   magnifyingGlass: {fileID: 2030284563}
+  endFrame: {fileID: 1129074525}
   m_Water: {fileID: 168577918}
   skill1: {fileID: 1568690075}
   skill2: {fileID: 1183418771}
@@ -23497,7 +23499,7 @@ MonoBehaviour:
   waterZone: {fileID: 1086080250}
   lineRenderer: {fileID: 1796240416}
   target: {fileID: 1189209901}
-  gameManager: {fileID: 878555805}
+  m_gameManager: {fileID: 878555804}
 --- !u!114 &1189209901
 MonoBehaviour:
   m_ObjectHideFlags: 0
