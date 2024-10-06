@@ -18,7 +18,7 @@ public class Ant : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Explosion"))
+        if (other.gameObject.CompareTag("Explosion") || other.gameObject.CompareTag("Water"))
         {
             Spawn spawn = transform.parent.gameObject.GetComponent<Spawn>();
             spawn.DecreaseInsectNumber();
