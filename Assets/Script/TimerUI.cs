@@ -4,6 +4,9 @@ using TMPro;
 
 public class TimerUI : MonoBehaviour
 {
+    [SerializeField]
+    GameObject endFrame;
+
     public TextMeshProUGUI timerText; // Référence vers le composant TextMeshPro
     public float startTime = 120f; // Temps de départ en secondes
     private float timeRemaining = 120f; // Timer initialisé à 2 minutes (120 secondes)
@@ -43,6 +46,7 @@ public class TimerUI : MonoBehaviour
                 // Lorsque le temps est écoulé
                 timeRemaining = 0;
                 timerIsRunning = false;
+                endFrame.SetActive(true);
                 UpdateTimerUI(timeRemaining);
                 CancelInvoke("FlashWarning"); // Arrêter le clignotement
                 timerText.color = warningColor; // Fixer la couleur rouge quand le temps est écoulé
