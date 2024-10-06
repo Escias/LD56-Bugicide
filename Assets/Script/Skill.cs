@@ -109,7 +109,6 @@ public class Skill : MonoBehaviour
         lineRenderer.SetPosition(1, pointToLook);
         lineRenderer.startWidth = 10;
         lineRenderer.endWidth = 1;
-        CheckInsect("light");
     }
 
     IEnumerator SkillDynamiteCoroutine()
@@ -167,23 +166,5 @@ public class Skill : MonoBehaviour
         m_Water.transform.position = pointToLook;
         water.transform.position = new Vector3(m_Water.transform.position.x - 1, m_Water.transform.position.y + 88, m_Water.transform.position.z);
         waterZone.transform.position = m_Water.transform.position;
-    }
-
-    private void CheckInsect(string skill)
-    {
-        try
-        {
-            if (pointObject.tag == "Ant" && skill == "light")
-            {
-                spawn = pointObject.transform.parent.gameObject.GetComponent<Spawn>();
-                spawn.DecreaseInsectNumber();
-                Ant ant = pointObject.GetComponent<Ant>();
-                ant.KillAnt();
-            }
-        }
-        catch
-        {
-
-        }
     }
 }
