@@ -6,11 +6,13 @@ TagManager:
   tags:
   - Ant
   - Explosion
+  - Water
+  - WaterEffect
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - IgnoreRaycastLayer
   - Water
   - UI
   - 
