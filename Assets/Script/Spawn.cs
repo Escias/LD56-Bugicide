@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Spawn : MonoBehaviour
 {
@@ -42,9 +43,12 @@ public class Spawn : MonoBehaviour
 
     IEnumerator SpawnInsectsWithInterval()
     {
-        while (currentInsectNumber < maxInsectSpawn)
+        while (true)
         {
-            SpawnInsect();
+            if (currentInsectNumber < maxInsectSpawn)
+            {
+                SpawnInsect();
+            }
             yield return new WaitForSeconds(timer);
         }
     }
@@ -53,9 +57,28 @@ public class Spawn : MonoBehaviour
     {
         if (currentInsectNumber < maxInsectSpawn)
         {
-            var enemy = Instantiate(m_Insect, new Vector3(Random.Range(plane.position.x - x_dim, plane.position.x + x_dim), plane.position.y, Random.Range(plane.position.z - z_dim, plane.position.z + z_dim)), Quaternion.identity);
-            enemy.transform.parent = gameObject.transform;
-            currentInsectNumber++;
+            Vector3 randomPosition = new Vector3(
+                Random.Range(plane.position.x - x_dim, plane.position.x + x_dim),
+                plane.position.y,
+                Random.Range(plane.position.z - z_dim, plane.position.z + z_dim)
+            );
+
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomPosition, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                var enemy = Instantiate(m_Insect, hit.position, Quaternion.identity);
+                enemy.transform.parent = gameObject.transform;
+                currentInsectNumber++;
+            }
+        }
+    }
+
+    public void DecreaseInsectNumber()
+    {
+        currentInsectNumber--;
+        if (currentInsectNumber < 0)
+        {
+            currentInsectNumber = 0;
         }
     }
 }
