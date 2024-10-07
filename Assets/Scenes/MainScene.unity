@@ -27050,6 +27050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1307505667}
+  finalScoreText: {fileID: 1479108456}
   timer: {fileID: 1751482458}
 --- !u!114 &1751482458
 MonoBehaviour:
