@@ -14,6 +14,7 @@ public class TimerUI : MonoBehaviour
     public Color normalColor = Color.white; // Couleur normale du texte
     public Color warningColor = Color.red; // Couleur de l'alerte (rouge)
     private float flashInterval = 0.5f; // Intervalle du clignotement (demi-seconde)
+    AudioSource audioSource;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class TimerUI : MonoBehaviour
         timerIsRunning = true;
         timeRemaining = startTime;
         timerText.color = normalColor;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -49,6 +51,7 @@ public class TimerUI : MonoBehaviour
                 UpdateTimerUI(timeRemaining);
                 CancelInvoke("FlashWarning"); // Arrêter le clignotement
                 timerText.color = warningColor; // Fixer la couleur rouge quand le temps est écoulé
+                audioSource.Play();
             }
         }
     }

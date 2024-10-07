@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ public class Menu : MonoBehaviour
     [SerializeField]
     private GameObject m_GameManager;
     TimerUI timerUI;
+    AudioSource[] audioSources;
 
     bool isActiveSideMenu = false;
     bool menuSceneActive;
@@ -15,6 +17,7 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioSources = GetComponents<AudioSource>();
         try
         {
             timerUI = m_GameManager.GetComponent<TimerUI>();
@@ -29,31 +32,55 @@ public class Menu : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("MainScene");
+        StartCoroutine(PlayAudioAndChangeScene(1, "main"));
     }
 
     public void ExitGame()
     {
-        Application.Quit();
+        StartCoroutine(PlayAudioAndChangeScene(0, "quit"));
     }
 
     public void GoMenu()
     {
-        SceneManager.LoadScene("MenuScene");
+        StartCoroutine(PlayAudioAndChangeScene(1, "menu"));
     }
 
     public void OpenSideMenu()
     {
         if (timerUI.IsTimerRunning())
         {
-            isActiveSideMenu = !isActiveSideMenu;
-            SideMenu.SetActive(isActiveSideMenu);
+            StartCoroutine(PlayAudioAndChangeScene(1, "control"));
         }
     }
 
     public void OpenSideMenuControls()
     {
-        isActiveSideMenu = !isActiveSideMenu;
-        SideMenu.SetActive(isActiveSideMenu);
+        StartCoroutine(PlayAudioAndChangeScene(1, "control"));
+    }
+
+    IEnumerator PlayAudioAndChangeScene(int audioIndex, string action)
+    {
+        if (audioSources != null && audioIndex >= 0 && audioIndex < audioSources.Length)
+        {
+            audioSources[audioIndex].Play();
+            yield return new WaitWhile(() => audioSources[audioIndex].isPlaying);
+        }
+        if (action == "main")
+        {
+            SceneManager.LoadScene("MainScene");
+        }
+        else if (action == "quit")
+        {
+            Application.Quit();
+        }
+        else if (action == "menu")
+        {
+            SceneManager.LoadScene("MenuScene");
+        }
+        else if (action == "control")
+        {
+            isActiveSideMenu = !isActiveSideMenu;
+            SideMenu.SetActive(isActiveSideMenu);
+        }
     }
 }

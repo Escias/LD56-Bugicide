@@ -31,6 +31,7 @@ public class Skill : MonoBehaviour
     GameManager gameManager;
     Vector3 pointToLook;
     GameObject pointObject;
+    AudioSource audioSource;
 
     Coroutine c_Light;
     Coroutine c_Dynamite;
@@ -49,6 +50,7 @@ public class Skill : MonoBehaviour
         gameManager = m_gameManager.GetComponent<GameManager>();
         timerUI = gameManager.GetComponent<TimerUI>();
         timeController = gameManager.GetComponent<TimeController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -60,14 +62,17 @@ public class Skill : MonoBehaviour
             pointObject = target.GetHitObject();
             if (Input.GetKeyDown(KeyCode.Alpha1) && !skillLightActive && !timeController.GetIsNight())
             {
+                audioSource.Play();
                 c_Light = StartCoroutine(SkillLightCoroutine());
             }
             if (Input.GetKeyDown(KeyCode.Alpha2) && !skillDynamiteActive)
             {
+                audioSource.Play();
                 c_Dynamite = StartCoroutine(SkillDynamiteCoroutine());
             }
             if (Input.GetKeyDown(KeyCode.Alpha3) && !skillWaterActive && timeController.GetIsNight())
             {
+                audioSource.Play();
                 c_Water = StartCoroutine(SkillWaterCoroutine());
             }
             if (startLight)
