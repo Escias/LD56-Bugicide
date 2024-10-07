@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraTarget : MonoBehaviour
@@ -31,7 +29,6 @@ public class CameraTarget : MonoBehaviour
                 pointToLook = hit.point;
                 hitObject = hit.collider.gameObject;
             }
-            Debug.DrawLine(cameraRay.origin, pointToLook, Color.blue);
         }
     }
 

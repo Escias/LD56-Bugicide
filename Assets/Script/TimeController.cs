@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class TimeController : MonoBehaviour
 {
@@ -45,6 +42,8 @@ public class TimeController : MonoBehaviour
 
     private TimeSpan sunsetTime;
 
+    private bool IsNight = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,6 +78,7 @@ public class TimeController : MonoBehaviour
             double percentage = timeSinceSunrise.TotalMinutes / sunriseToSunsetDuration.TotalMinutes;
 
             sunLightRotation = Mathf.Lerp(0, 180, (float)percentage);
+            IsNight = false;
         }
         else
         {
@@ -88,6 +88,7 @@ public class TimeController : MonoBehaviour
             double percentage = timeSinceSunset.TotalMinutes / sunsetToSunriseDuration.TotalMinutes;
 
             sunLightRotation = Mathf.Lerp(180, 360, (float)percentage);
+            IsNight = true;
         }
 
         sunLight.transform.rotation = Quaternion.AngleAxis(sunLightRotation, Vector3.right);
@@ -111,5 +112,10 @@ public class TimeController : MonoBehaviour
         }
 
         return difference;
+    }
+
+    public bool GetIsNight()
+    {
+        return IsNight;
     }
 }

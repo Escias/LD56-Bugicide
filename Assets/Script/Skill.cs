@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Android;
 
 public class Skill : MonoBehaviour
 {
@@ -30,6 +27,7 @@ public class Skill : MonoBehaviour
     public GameObject m_gameManager;
     Spawn spawn;
     TimerUI timerUI;
+    TimeController timeController;
     GameManager gameManager;
     Vector3 pointToLook;
     GameObject pointObject;
@@ -40,17 +38,17 @@ public class Skill : MonoBehaviour
 
     bool startLight = false;
     bool startWater = false;
-    bool day;
     bool skillLightActive = false;
     bool skillDynamiteActive = false;
     bool skillWaterActive = false;
-
+    bool IsDay = true;
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = m_gameManager.GetComponent<GameManager>();
         timerUI = gameManager.GetComponent<TimerUI>();
+        timeController = gameManager.GetComponent<TimeController>();
     }
 
     // Update is called once per frame
@@ -60,7 +58,7 @@ public class Skill : MonoBehaviour
         {
             pointToLook = target.GetPointToLook();
             pointObject = target.GetHitObject();
-            if (Input.GetKeyDown(KeyCode.Alpha1) && !skillLightActive)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !skillLightActive && !timeController.GetIsNight())
             {
                 c_Light = StartCoroutine(SkillLightCoroutine());
             }
@@ -68,7 +66,7 @@ public class Skill : MonoBehaviour
             {
                 c_Dynamite = StartCoroutine(SkillDynamiteCoroutine());
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3) && !skillWaterActive)
+            if (Input.GetKeyDown(KeyCode.Alpha3) && !skillWaterActive && timeController.GetIsNight())
             {
                 c_Water = StartCoroutine(SkillWaterCoroutine());
             }
@@ -79,6 +77,19 @@ public class Skill : MonoBehaviour
             if (startWater)
             {
                 SkillWater();
+            }
+            if (timeController.GetIsNight() && !skillLightActive)
+            {
+                gameManager.SetImageColor(gameManager.skill1, 100, 100, 100, 255);
+                if (IsDay)
+                {
+                    gameManager.SetImageColor(gameManager.skill3, 255, 255, 255, 255);
+                    IsDay = false;
+                }
+            }
+            if (!timeController.GetIsNight() && !skillWaterActive)
+            {
+                gameManager.SetImageColor(gameManager.skill3, 100, 100, 100, 255);
             }
         }
     }
