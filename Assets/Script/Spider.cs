@@ -8,8 +8,9 @@ public class Spider : MonoBehaviour
     bool isTakingDamage = false;
 
     Coroutine c_TakeDamageMagnifyingGlass;
-    Coroutine c_TakeDamageDynamite;
     Coroutine c_TakeDamageWater;
+
+    Material material;
 
     // Start is called before the first frame update
     void Start()
@@ -34,15 +35,19 @@ public class Spider : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Explosion"))
+        {
+            TakeDamage(200);
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("MagnifyingGlass"))
         {
             c_TakeDamageMagnifyingGlass = StartCoroutine(TakeDamageOverTime(1));
-        }
-        else if (other.gameObject.CompareTag("Explosion"))
-        {
-            c_TakeDamageDynamite = StartCoroutine(TakeDamageOverTime(200));
         }
         else if (other.gameObject.CompareTag("Water"))
         {
@@ -55,11 +60,6 @@ public class Spider : MonoBehaviour
         if (other.gameObject.CompareTag("MagnifyingGlass"))
         {
             StopCoroutine(c_TakeDamageMagnifyingGlass);
-            isTakingDamage = false;
-        }
-        else if (other.gameObject.CompareTag("Explosion"))
-        {
-            StopCoroutine(c_TakeDamageDynamite);
             isTakingDamage = false;
         }
         else if (other.gameObject.CompareTag("Water"))
@@ -76,15 +76,28 @@ public class Spider : MonoBehaviour
 
         while (isTakingDamage)
         {
-            health -= damage;
-            Debug.Log("Spider health: " + health);
+            TakeDamage(damage);
             yield return new WaitForSeconds(0.3f);
         }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        StartCoroutine(ShowHitEffect());
     }
 
     public void KillSpider()
     {
         FindObjectOfType<ScoreManager>().AddScore(50);
         Destroy(transform.gameObject);
+    }
+
+    IEnumerator ShowHitEffect()
+    {
+        material = transform.gameObject.GetComponent<Renderer>().materials[0];
+        material.SetFloat("_Blend", 1f);
+        yield return new WaitForSeconds(0.2f);
+        material.SetFloat("_Blend", 0f);
     }
 }

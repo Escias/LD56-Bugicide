@@ -17,7 +17,6 @@ public class Menu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        menuSceneActive = SceneManager.GetActiveScene().name == "MenuScene";
         try
         {
             timerUI = m_GameManager.GetComponent<TimerUI>();
@@ -28,10 +27,6 @@ public class Menu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKey && !timerUI.IsTimerRunning() && !menuSceneActive)
-        {
-            GoMenu();
-        }
     }
 
     public void StartGame()
@@ -56,5 +51,11 @@ public class Menu : MonoBehaviour
             isActiveSideMenu = !isActiveSideMenu;
             SideMenu.SetActive(isActiveSideMenu);
         }
+    }
+
+    public void OpenSideMenuControls()
+    {
+        isActiveSideMenu = !isActiveSideMenu;
+        SideMenu.SetActive(isActiveSideMenu);
     }
 }

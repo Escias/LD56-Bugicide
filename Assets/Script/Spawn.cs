@@ -61,7 +61,7 @@ public class Spawn : MonoBehaviour
     {
         if (currentInsectNumber < maxInsectSpawn)
         {
-            int rate = Random.Range(0, 100);
+            float rate = Random.Range(0.0f, 100.0f);
             Vector3 randomPosition = new Vector3(
                 Random.Range(plane.position.x - x_dim, plane.position.x + x_dim),
                 plane.position.y,
