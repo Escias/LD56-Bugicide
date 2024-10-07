@@ -10,7 +10,11 @@ public class Spawn : MonoBehaviour
     public Transform plane;
 
     [SerializeField]
-    public GameObject m_Insect;
+    public GameObject m_Ant;
+    [SerializeField]
+    public GameObject m_Spider;
+    [SerializeField]
+    public GameObject m_Beetle;
 
     public float timer = 0.5f;
 
@@ -47,16 +51,17 @@ public class Spawn : MonoBehaviour
         {
             if (currentInsectNumber < maxInsectSpawn)
             {
-                SpawnInsect();
+                SpawnRateInsect();
             }
             yield return new WaitForSeconds(timer);
         }
     }
 
-    void SpawnInsect()
+    void SpawnRateInsect()
     {
         if (currentInsectNumber < maxInsectSpawn)
         {
+            int rate = Random.Range(0, 100);
             Vector3 randomPosition = new Vector3(
                 Random.Range(plane.position.x - x_dim, plane.position.x + x_dim),
                 plane.position.y,
@@ -66,11 +71,27 @@ public class Spawn : MonoBehaviour
             NavMeshHit hit;
             if (NavMesh.SamplePosition(randomPosition, out hit, 1.0f, NavMesh.AllAreas))
             {
-                var enemy = Instantiate(m_Insect, hit.position, Quaternion.identity);
-                enemy.transform.parent = gameObject.transform;
-                currentInsectNumber++;
+                if (rate < 96) 
+                {
+                    SpawnInsect(m_Ant, hit);
+                }
+                else if (rate >= 96 && rate < 99)
+                {
+                    SpawnInsect(m_Spider, hit);
+                }
+                else if (rate >= 99)
+                {
+                    SpawnInsect(m_Beetle, hit);
+                }
             }
         }
+    }
+
+    void SpawnInsect(GameObject insect, NavMeshHit hit)
+    {
+        var enemy = Instantiate(insect, hit.position, Quaternion.identity);
+        enemy.transform.parent = gameObject.transform;
+        currentInsectNumber++;
     }
 
     public void DecreaseInsectNumber()

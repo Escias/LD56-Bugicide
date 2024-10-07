@@ -8,6 +8,8 @@ TagManager:
   - Explosion
   - Water
   - WaterEffect
+  - Spider
+  - MagnifyingGlass
   layers:
   - Default
   - TransparentFX

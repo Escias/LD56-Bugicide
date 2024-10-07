@@ -109,7 +109,6 @@ public class Skill : MonoBehaviour
         lineRenderer.SetPosition(1, pointToLook);
         lineRenderer.startWidth = 10;
         lineRenderer.endWidth = 1;
-        CheckInsect("light");
     }
 
     IEnumerator SkillDynamiteCoroutine()
@@ -122,7 +121,7 @@ public class Skill : MonoBehaviour
         yield return new WaitForSeconds(5f);
         Destroy(dynamite);
         GameObject explosion = Instantiate(m_Explosion, dynamite.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.0000000000000001f);
         SphereCollider sphereCollider = explosion.GetComponent<SphereCollider>();
         sphereCollider.enabled = false;
         yield return new WaitForSeconds(1.3f);
@@ -167,23 +166,5 @@ public class Skill : MonoBehaviour
         m_Water.transform.position = pointToLook;
         water.transform.position = new Vector3(m_Water.transform.position.x - 1, m_Water.transform.position.y + 88, m_Water.transform.position.z);
         waterZone.transform.position = m_Water.transform.position;
-    }
-
-    private void CheckInsect(string skill)
-    {
-        try
-        {
-            if (pointObject.tag == "Ant" && skill == "light")
-            {
-                spawn = pointObject.transform.parent.gameObject.GetComponent<Spawn>();
-                spawn.DecreaseInsectNumber();
-                Ant ant = pointObject.GetComponent<Ant>();
-                ant.KillAnt();
-            }
-        }
-        catch
-        {
-
-        }
     }
 }
