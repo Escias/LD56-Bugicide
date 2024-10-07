@@ -5,6 +5,7 @@ using TMPro;
 public class ScoreManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText; // Référence vers le composant TextMeshPro
+    public TextMeshProUGUI finalScoreText;
     private int score = 0; // Score initial
     public TimerUI timer; // Référence au script du TimerUI pour vérifier l'état du timer
 
@@ -35,5 +36,6 @@ public class ScoreManager : MonoBehaviour
     void UpdateScoreUI()
     {
         scoreText.text = score.ToString(); // Met à jour le texte avec la nouvelle valeur du score
+        finalScoreText.text = score.ToString(); // Met à jour le texte avec la nouvelle valeur du score
     }
 }
